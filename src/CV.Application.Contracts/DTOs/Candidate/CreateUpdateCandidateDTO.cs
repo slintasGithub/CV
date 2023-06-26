@@ -27,6 +27,6 @@ namespace Manager.DTOs.Candidate
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        public List<CreateUpdateDegreeDTO> Degree { get; set; } = new List<CreateUpdateDegreeDTO>();
+        public DegreeDTO Degree { get; set; } = new DegreeDTO();
     }
 }
