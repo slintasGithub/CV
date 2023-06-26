@@ -1,0 +1,42 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using CV.Localization
+@using Volo.Abp.Users
+@model CV.Web.Pages.IndexModel
+@inject IHtmlLocalizer<CVResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+<abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+<abp-script src="/Pages/Index.js" />
+}
+
+
+<h2>Candidates</h2>
+<h2>Insert</h2>
+<div id="insertCandidates">
+</div>
+
+<h2>Display</h2>
+<div id="candidates">
+
+</div>
+
+<h2>Degrees</h2>
+<div id="insertDegree">
+</div>
+
+<div id="degrees">
+
+</div>
+
+<script>
+    window.onload = async () => {
+        await fetch("Candidate/GetForm").then((res) => { return res.text(); }).then((res) => { document.getElementById("insertCandidates").innerHTML = res });
+        await fetch("Candidate/GetList").then((res) => { return res.text(); }).then((res) => { document.getElementById("candidates").innerHTML = res });
+        await fetch("Degree/GetForm").then((res) => { return res.text(); }).then((res) => { document.getElementById("insertDegree").innerHTML = res });
+        await fetch("Degree/GetList").then((res) => { return res.text(); }).then((res) => { document.getElementById("degrees").innerHTML = res });
+    };
+</script>
+<script src="~/JavaScript/Candidate/Candidate.js" />

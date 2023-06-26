@@ -1,0 +1,47 @@
+﻿@using Manager.DTOs.Degree;
+@using Manager.Enums.Degree;
+@model CreateUpdateDegreeDTO
+@{
+
+}
+
+<scirpt src="~/JavaScript/Candidate/Candidate.js"></scirpt>
+@*
+@using (Html.BeginForm("SaveDegree", "Degree", FormMethod.Post, new { id = "DegreeForm" }))
+{
+    <div class="row" style="margin-bottom: 10px;" id="CandidateCreation">
+        <div class="col-2">
+            @Html.LabelFor(x => x.DegreeType)
+            <select name="@nameof(Model.DegreeType)">
+                <option>@DegreeType.None</option>
+                <option>@DegreeType.MSc</option>
+                <option>@DegreeType.BSc</option>
+                <option>@DegreeType.PhD</option>
+            </select>
+            @Html.ValidationMessageFor(x => x.DegreeType)
+        </div>
+        <div class="col-2">
+            @Html.LabelFor(x => x.CandidateId)
+            @Html.TextBoxFor(x => x.CandidateId)
+            @Html.ValidationMessageFor(x => x.CandidateId)
+        </div>
+        <div class="col-2">
+            @Html.LabelFor(x => x.CV)
+            <input type="file" name="@nameof(Model.CV)" id="CVFile" />
+            @Html.ValidationMessageFor(x => x.CV)
+        </div>
+        <div class="col-2">
+            <input type="submit" class="btn btn-primary" value="create" onclick="setTimeout(() => {window.location = window.origin}, 1500) " />
+        </div>
+    </div>
+}
+*@
+
+<form method="post" enctype="multipart/form-data" action="/Degree/UploadFile">
+    <input type="text" name="CandidateId" id="CandidateId" placeholder="Candidate ID" value="32"/>
+    <input type="text" name="DegreeType" id="DegreeType" placeholder="None/BSc/MSc/PhD" value="BSc"/>
+    <input type="file" name="file" id="fileInput" />
+    <input type="submit" value="Upload" onclick="handleFileUpload(event)" />
+</form>
+
+

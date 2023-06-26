@@ -1,0 +1,33 @@
+﻿@using Manager.DTOs.Candidate;
+@model CreateUpdateCandidateDTO
+
+<scirpt src="~/JavaScript/Candidate/Candidate.js"></scirpt>
+
+@using (Html.BeginForm("SaveCandidate", "Candidate", FormMethod.Post, new { id = "CandidateForm" }))
+{
+    <div class="row" style="margin-bottom: 10px;" id="CandidateCreation">
+        <div class="col-2">
+            @Html.LabelFor(x => x.FirstName)
+            @Html.TextBoxFor(x => x.FirstName)
+            @Html.ValidationMessageFor(x => x.FirstName)
+        </div>
+        <div class="col-2">
+            @Html.LabelFor(x => x.LastName)
+            @Html.TextBoxFor(x => x.LastName)
+            @Html.ValidationMessageFor(x => x.LastName)
+        </div>
+        <div class="col-2">
+            @Html.LabelFor(x => x.Mobile)
+            @Html.TextBoxFor(x => x.Mobile)
+            @Html.ValidationMessageFor(x => x.Mobile)
+        </div>
+        <div class="col-2">
+            @Html.LabelFor(x => x.Email)
+            @Html.TextBoxFor(x => x.Email)
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+        <div class="col-2">
+            <input type="submit" class="btn btn-primary" value="create" onclick="setTimeout(() => {window.location = window.origin}, 1500) " />
+        </div>
+    </div>
+}

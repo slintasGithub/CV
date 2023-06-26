@@ -1,0 +1,18 @@
+﻿@model List<Manager.DTOs.Degree.DegreeDTO>
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-2">ID</div>
+    <div class="col-2">Candidate ID</div>
+    <div class="col-2">Degree Type</div>
+</div>
+@foreach(var item in Model)
+{
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-2">@item.Id</div>
+        <div class="col-2">@item.CandidateId</div>
+        <div class="col-2">@item.DegreeType</div>
+        <div class="col-2">
+            <input type="button" class="btn btn-primary" value="Delete" onclick="deleteDegree(@item.Id)" />
+        </div>
+    </div>
+}

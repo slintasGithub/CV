@@ -1,0 +1,55 @@
+﻿@model List<Manager.DTOs.Candidate.CandidateDTO>
+
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-2">
+        First Name
+    </div>
+    <div class="col-2">
+        Last Name
+    </div>
+    <div class="col-2">
+        Mobile
+    </div>
+    <div class="col-2">
+        Email
+    </div>
+    <div class="col-2">
+        Degrees
+    </div>
+</div>
+
+@foreach(var item in Model)
+{
+    string base64String = string.Empty;
+    if(item.Degree != null)
+    {
+        base64String = Convert.ToBase64String(item.Degree.CV);
+    }
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-2">
+            @item.Id, 
+            @item.FirstName
+        </div>
+        <div class="col-2">
+            @item.LastName
+        </div>
+        <div class="col-2">
+            @item.Mobile
+        </div>
+        <div class="col-2">
+            @item.Email
+        </div>
+        <div class="col-2">
+
+            @if (!string.IsNullOrEmpty(base64String))
+            {
+                var fileName = item.FirstName + " " + item.LastName;
+                var type = "application/pdf";
+                <a href="javascript:void(0);" onclick="downloadFile('@fileName', '@type', '@base64String')">Download File</a>
+            }
+        </div>
+        <div class="col-2">
+            <input type="button" class="btn btn-primary" value="Delete" onclick="deleteCandidate(@item.Id)" />
+        </div>
+    </div>
+}
