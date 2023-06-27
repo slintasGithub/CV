@@ -26,11 +26,11 @@ namespace CV.Migrations
 
             modelBuilder.Entity("Manager.Entities.Candidate.Candidate", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -127,9 +127,7 @@ namespace CV.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CandidateId")
-                        .IsUnique()
-                        .HasFilter("[CandidateId] IS NOT NULL");
+                    b.HasIndex("CandidateId");
 
                     b.ToTable("CV_Degrees", "CV");
                 });
@@ -1793,8 +1791,9 @@ namespace CV.Migrations
             modelBuilder.Entity("Manager.Entities.Degree.Degree", b =>
                 {
                     b.HasOne("Manager.Entities.Candidate.Candidate", "Candidate")
-                        .WithOne("Degree")
-                        .HasForeignKey("Manager.Entities.Degree.Degree", "CandidateId");
+                        .WithMany()
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Candidate");
                 });
@@ -1938,12 +1937,6 @@ namespace CV.Migrations
                         .WithMany("ConnectionStrings")
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Manager.Entities.Candidate.Candidate", b =>
-                {
-                    b.Navigation("Degree")
                         .IsRequired();
                 });
 

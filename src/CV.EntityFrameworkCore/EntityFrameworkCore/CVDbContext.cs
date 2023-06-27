@@ -96,10 +96,16 @@ public class CVDbContext :
             degree.HasKey(x => x.Id);
         }).UseIdentityColumns();
 
-        builder.Entity<Manager.Entities.Candidate.Candidate>()
-            .HasOne(x => x.Degree)
-            .WithOne(x => x.Candidate)
-            .IsRequired(false)
-            ;
+        //builder.Entity<Manager.Entities.Candidate.Candidate>()
+        //    .HasOne(x => x.Degree)
+        //    .WithOne(x => x.Candidate)
+        //    .IsRequired(false)
+        //    ;
+
+        builder.Entity<Manager.Entities.Degree.Degree>()
+            .HasOne(x => x.Candidate)
+            .WithMany()
+            .HasForeignKey(x => x.CandidateId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

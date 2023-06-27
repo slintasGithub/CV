@@ -18,12 +18,11 @@ namespace Manager.Entities.Degree
 
         public DegreeType DegreeType { get; set; }
 
-        [Required]
         public byte[] CV { get; set; }
 
-        [ForeignKey(nameof(Candidate))]
         public int? CandidateId { get; set; } = null;
 
+        [ForeignKey(nameof(CandidateId))]
         public virtual Manager.Entities.Candidate.Candidate? Candidate { get; set; } = null;
     }
 }
